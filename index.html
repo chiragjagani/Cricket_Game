@@ -96,6 +96,9 @@
         win: 0,
         lost: 0,
         tie: 0,
+        displayScore(){
+          return `No of matches Won:${score.win}, Lost:${score.lost}, Tie:${score.tie}`
+        }
       };
 
       function generatecomputerMove() {
@@ -148,12 +151,13 @@
       }
       function showResult(userMove, computerMove, resultMsg) {
         console.log(score);
+
         alert(
           `You have chosen ${userMove}. Computer chocie is ${computerMove} 
           
           ${resultMsg}
           
-          Won:${score.win}, Lost:${score.lost}, Tie:${score.tie}
+         ${score.displayScore()}
         `
         );
       }
