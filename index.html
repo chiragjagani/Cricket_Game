@@ -91,15 +91,28 @@
       Stump
     </button>
 
+    <button
+      class="btnRst"
+      onclick="localStorage.clear() 
+      resetScore();"
+    >
+      Restart
+    </button>
+
     <script>
-      let score = {
-        win: 0,
-        lost: 0,
-        tie: 0,
-        displayScore(){
-          return `No of matches Won:${score.win}, Lost:${score.lost}, Tie:${score.tie}`
-        }
-      };
+      let scoreStr = localStorage.getItem("Score");
+      let score
+      resetScore(scoreStr)
+      function resetScore(scoreStr) {
+        score =  scoreStr ? JSON.parse(scoreStr) : {
+          win: 0,
+          lost: 0,
+          tie: 0,
+        };
+        score.displayScore = function() {
+          return `No of matches Won:${score.win}, Lost:${score.lost}, Tie:${score.tie}`;
+        };
+      }
 
       function generatecomputerMove() {
         // this will generate random number between 0 and 3
@@ -151,12 +164,12 @@
       }
       function showResult(userMove, computerMove, resultMsg) {
         console.log(score);
-
+        localStorage.setItem("Score", JSON.stringify(score));
         alert(
-          `You have chosen ${userMove}. Computer chocie is ${computerMove} 
-          
+          `You have chosen ${userMove}. Computer chocie is ${computerMove}
+
           ${resultMsg}
-          
+
          ${score.displayScore()}
         `
         );
