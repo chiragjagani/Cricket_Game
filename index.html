@@ -58,20 +58,26 @@
         transform: translateY(-3px);
       }
 
-      h3 {
+      .user-move,
+      .computer-move,
+      .result,
+      .score {
         background-color: rgba(
-          255,
-          255,
-          255,
-          0.8
-        ); /* Semi-transparent white background */
-        padding: 10px;
+          0,
+          0,
+          0,
+          0.7
+        ); /* Dark background with some transparency */
+        color: #fff; /* White text color */
+        padding: 10px 20px;
         border-radius: 5px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Slight shadow for the text */
-        margin: 10px 0; /* Add some space around each h3 */
-        width: 80%; /* Set a max width */
-        box-sizing: border-box; /* Include padding in the width */
-        text-align: center; /* Center the text */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        margin: 10px 0;
+        width: auto; /* Adjust width as needed */
+        box-sizing: border-box;
+        text-align: center;
+        font-weight: bold; /* Make the font bold */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Soft shadow for depth */
       }
     </style>
   </head>
@@ -133,8 +139,10 @@
               tie: 0,
             };
         score.displayScore = function () {
-          return `No of matches Won:${score.win}, Lost:${score.lost}, Tie:${score.tie}`;
+          return `Score: Won:${score.win}, Lost:${score.lost}, Tie:${score.tie}`;
         };
+
+        showResult();
       }
 
       function generatecomputerMove() {
@@ -188,13 +196,14 @@
       function showResult(userMove, computerMove, resultMsg) {
         console.log(score);
         localStorage.setItem("Score", JSON.stringify(score));
-        document.querySelector(
-          ".user-move"
-        ).innerText = `You have chosen ${userMove}`;
-        document.querySelector(
-          ".computer-move"
-        ).innerText = `Computer chocie is ${computerMove}`;
-        document.querySelector(".result").innerText = resultMsg;
+        document.querySelector(".user-move").innerText =
+          userMove !== undefined ? `You have chosen ${userMove}` : ``;
+        document.querySelector(".computer-move").innerText =
+          computerMove !== undefined
+            ? `Computer chocie is ${computerMove}`
+            : "";
+        document.querySelector(".result").innerText =
+          resultMsg !== undefined ? resultMsg : "";
         document.querySelector(".score").innerText = score.displayScore();
       }
     </script>
