@@ -57,6 +57,22 @@
         box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
         transform: translateY(-3px);
       }
+
+      h3 {
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.8
+        ); /* Semi-transparent white background */
+        padding: 10px;
+        border-radius: 5px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Slight shadow for the text */
+        margin: 10px 0; /* Add some space around each h3 */
+        width: 80%; /* Set a max width */
+        box-sizing: border-box; /* Include padding in the width */
+        text-align: center; /* Center the text */
+      }
     </style>
   </head>
 
@@ -98,6 +114,11 @@
     >
       Restart
     </button>
+
+    <h3 class="user-move"></h3>
+    <h3 class="computer-move"></h3>
+    <h3 class="result"></h3>
+    <h3 class="score"></h3>
 
     <script>
       let scoreStr = localStorage.getItem("Score");
@@ -167,14 +188,14 @@
       function showResult(userMove, computerMove, resultMsg) {
         console.log(score);
         localStorage.setItem("Score", JSON.stringify(score));
-        alert(
-          `You have chosen ${userMove}. Computer chocie is ${computerMove}
-
-          ${resultMsg}
-
-         ${score.displayScore()}
-        `
-        );
+        document.querySelector(
+          ".user-move"
+        ).innerText = `You have chosen ${userMove}`;
+        document.querySelector(
+          ".computer-move"
+        ).innerText = `Computer chocie is ${computerMove}`;
+        document.querySelector(".result").innerText = resultMsg;
+        document.querySelector(".score").innerText = score.displayScore();
       }
     </script>
   </body>
