@@ -196,14 +196,15 @@
       function showResult(userMove, computerMove, resultMsg) {
         console.log(score);
         localStorage.setItem("Score", JSON.stringify(score));
-        document.querySelector(".user-move").innerText =
-          userMove !== undefined ? `You have chosen ${userMove}` : ``;
-        document.querySelector(".computer-move").innerText =
-          computerMove !== undefined
-            ? `Computer chocie is ${computerMove}`
-            : "";
-        document.querySelector(".result").innerText =
-          resultMsg !== undefined ? resultMsg : "";
+        document.querySelector(".user-move").innerText = userMove
+          ? `You have chosen ${userMove}`
+          : ``;
+        document.querySelector(".computer-move").innerText = computerMove
+          ? `Computer chocie is ${computerMove}`
+          : "";
+        document.querySelector(".result").innerText = resultMsg
+          ? resultMsg
+          : "";
         document.querySelector(".score").innerText = score.displayScore();
       }
     </script>
