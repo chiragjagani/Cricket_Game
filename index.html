@@ -101,15 +101,17 @@
 
     <script>
       let scoreStr = localStorage.getItem("Score");
-      let score
-      resetScore(scoreStr)
+      let score;
+      resetScore(scoreStr);
       function resetScore(scoreStr) {
-        score =  scoreStr ? JSON.parse(scoreStr) : {
-          win: 0,
-          lost: 0,
-          tie: 0,
-        };
-        score.displayScore = function() {
+        score = scoreStr
+          ? JSON.parse(scoreStr)
+          : {
+              win: 0,
+              lost: 0,
+              tie: 0,
+            };
+        score.displayScore = function () {
           return `No of matches Won:${score.win}, Lost:${score.lost}, Tie:${score.tie}`;
         };
       }
