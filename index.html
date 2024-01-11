@@ -37,7 +37,7 @@
       }
 
       .btn {
-        background: linear-gradient(to right, #3498db, #2980b9);
+        background: transparent;
         color: #fff;
         border: none;
         border-radius: 50px;
@@ -62,6 +62,23 @@
       .computer-move,
       .result,
       .score {
+        background-color: transparent; /* Make background transparent by default */
+        color: #fff; /* Set text color */
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        margin: 10px 0;
+        width: auto;
+        box-sizing: border-box;
+        text-align: center;
+        font-weight: bold;
+        transition: background-color 0.3s ease; /* Smooth transition for background color */
+      }
+
+      .user-move:not(:empty),
+      .computer-move:not(:empty),
+      .result:not(:empty),
+      .score:not(:empty) {
         background-color: rgba(
           0,
           0,
@@ -78,40 +95,68 @@
         text-align: center;
         font-weight: bold; /* Make the font bold */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Soft shadow for depth */
+        transition: background-color 0.3s ease; /* Smooth transition for background color */
+      }
+
+      .batImg,
+      .ballImg,
+      .stumpImg {
+        width: 50px; /* Or the size that fits well in your button */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* To remove any unwanted space below the image */
+        margin: 0 auto; /* Center the image within the button */
+        transition: transform 0.3s ease; /* Smooth transition for any hover effects */
+      }
+
+      /* Optional: Add a hover effect to scale the images slightly */
+      .btn:hover .batImg,
+      .btn:hover .ballImg,
+      .btn:hover .stumpImg {
+        transform: scale(1.1);
+      }
+
+      .buttons-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap; /* Prevent wrapping to a new line */
+        gap: 10px; /* Optional: adds space between buttons */
       }
     </style>
   </head>
 
   <body>
     <h1>Bat Ball Stump Game</h1>
-    <button
-      class="btn"
-      onclick="
+    <div class="buttons-container">
+      <button
+        class="btn"
+        onclick="
       let computerMove = generatecomputerMove();
       let resultMsg = getResult('Bat', computerMove);
       showResult('Bat', computerMove, resultMsg);
     "
-    >
-      Bat
-    </button>
-    <button
-      class="btn"
-      onclick="
+      >
+        <img src="img/bat.png" alt="bat" class="batImg" />
+      </button>
+      <button
+        class="btn"
+        onclick="
       computerMove = generatecomputerMove();
       resultMsg = getResult('Ball', computerMove);
       showResult('Ball', computerMove, resultMsg);"
-    >
-      Ball
-    </button>
-    <button
-      class="btn"
-      onclick="
+      >
+        <img src="img/ball.png" alt="ball" class="ballImg" />
+      </button>
+      <button
+        class="btn"
+        onclick="
         computerMove = generatecomputerMove();
          resultMsg = getResult('Stump', computerMove);
         showResult('Stump', computerMove, resultMsg);"
-    >
-      Stump
-    </button>
+      >
+        <img src="img/stump.png" alt="stump" class="stumpImg" />
+      </button>
+    </div>
 
     <button
       class="btnRst"
@@ -202,9 +247,7 @@
         document.querySelector(".computer-move").innerText = computerMove
           ? `Computer chocie is ${computerMove}`
           : "";
-        document.querySelector(".result").innerText = resultMsg
-          ? resultMsg
-          : "";
+        document.querySelector(".result").innerText = resultMsg || "";
         document.querySelector(".score").innerText = score.displayScore();
       }
     </script>
